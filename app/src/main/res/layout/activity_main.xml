@@ -15,7 +15,8 @@
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tour List" />
+        android:text="Tour List"
+        android:onClick="startMonumentActivity"/>
 
 
     <Space
@@ -42,6 +43,7 @@
         android:id="@+id/button3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Score" />
+        android:text="Score"
+        android:onClick="startScoreActivity"/>
 
 </LinearLayout>
