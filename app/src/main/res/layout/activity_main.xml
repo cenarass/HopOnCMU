@@ -1,49 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="pt.ulisboa.tecnico.cmov.hoponcmu.MainActivity"
-        android:background="@color/dark_green"
-        android:padding="50dip"
-        >
-
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="pt.ulisboa.tecnico.cmov.hoponcmu.MainActivity">
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tour List"
-        android:onClick="startMonumentActivity"/>
-
-
-    <Space
-        android:layout_width="1dp"
-        android:layout_height="60dp"/>
-
-    <Spinner
-        android:id="@+id/quiz_id"
-        android:layout_width="match_parent"
-        android:gravity="center_horizontal"
-        android:entries="@array/test_quiz"
-        android:layout_height="30dp"
-        android:background="@color/white"
-        />
-
-
-
-    <Space
-        android:layout_width="1dp"
-        android:layout_height="60dp"/>
-
+        android:id="@+id/monList_btn"
+        android:layout_width="140dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="128dp"
+        android:text="List Monuments"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/score_btn"
+        android:layout_width="140dp"
+        android:layout_height="51dp"
+        android:layout_marginBottom="108dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="8dp"
         android:text="Score"
-        android:onClick="startScoreActivity"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quizes_btn"
+        app:layout_constraintVertical_bias="1.0" />
 
-</LinearLayout>
+    <Button
+        android:id="@+id/quizes_btn"
+        android:layout_width="140dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="60dp"
+        android:text="Quizes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/monList_btn" />
+</android.support.constraint.ConstraintLayout>
+

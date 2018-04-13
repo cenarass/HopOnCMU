@@ -3,24 +3,31 @@
     package="pt.ulisboa.tecnico.cmov.hoponcmu">
 
     <application
+        android:name=".HopOnCMUApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginActivity"
+                  android:launchMode="singleTask" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".MainActivity"
+                  android:launchMode="singleTask" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".QuizActivity" />
         <activity android:name=".MonumentActivity" />
-        <activity android:name=".ScoreActivity"></activity>
+        <activity android:name=".ScoreActivity" />
+
+        <service
+            android:name=".HopOnService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
