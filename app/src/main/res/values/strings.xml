@@ -1,7 +1,33 @@
 <resources>
     <string name="app_name">HopOnCMU</string>
 
+    <string-array name="test_quiz">
+        <item>QUIZ 1</item>
+        <item>QUIZ 2</item>
+        <item>QUIZ 3</item>
+        <item>Panteão Nacional</item>
+        <item>Torre de Belém</item>
+        <item>Mosteiro dos Jerónimos</item>
+        <item>Sé – Catedral de Lisboa</item>
+        <item>Basílica da Estrela</item>
+        <item>Convento do Carmo</item>
+    </string-array>
+
+    <string-array name="monument_list">
+        <item>Castelo de São Jorge</item>
+        <item>Elevador de Santa Justa</item>
+        <item>Padrão dos Descobrimentos</item>
+        <item>Panteão Nacional</item>
+        <item>Torre de Belém</item>
+        <item>Mosteiro dos Jerónimos</item>
+        <item>Sé – Catedral de Lisboa</item>
+        <item>Basílica da Estrela</item>
+        <item>Convento do Carmo</item>
+    </string-array>
+
+
     <string-array name="country_arrays">
+        <item>Portugal</item>
         <item>Malaysia</item>
         <item>United States</item>
         <item>Indonesia</item>
@@ -10,7 +36,6 @@
         <item>Singapore</item>
         <item>New Zealand</item>
         <item>India</item>
-        <item>Portugal</item>
     </string-array>
 
 </resources>

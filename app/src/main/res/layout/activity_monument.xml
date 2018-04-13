@@ -1,9 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MonumentActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MonumentActivity"
+        android:background="@color/dark_green"
+        android:padding="50dip"
+        >
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="If you are in the area choose a monument you see!!" />
+
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="40dp"/><Space
+    android:layout_width="1dp"
+    android:layout_height="40dp"/>
+
+
+    <Spinner
+        android:id="@+id/monument_id"
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal"
+        android:entries="@array/monument_list"
+        android:layout_height="30dp"
+        android:background="@color/white"
+        />
+
+
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="40dp"/>
+
+
+
+
+</LinearLayout >

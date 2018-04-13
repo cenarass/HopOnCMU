@@ -1,61 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".LoginActivity"
+        android:background="@color/dark_green"
+        android:padding="50dip"
+        >
 
 
-    <Button
-        android:id="@+id/login_btn"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        tools:layout_editor_absoluteX="117dp"
-        tools:layout_editor_absoluteY="311dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingBottom="16dip"
+            android:text="Please insert your Username and Bus Code provided in your ticket below"
+            android:textColor="@color/black" />
 
-    <Button
-        android:id="@+id/SignIn_btn"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:text="Sign In"
-        tools:layout_editor_absoluteX="132dp"
-        tools:layout_editor_absoluteY="405dp" />
+        <TextView
+            android:id="@+id/Username_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"/>
+            android:text="" />
 
-    <EditText
-        android:id="@+id/Username_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Username"
-        tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="102dp" />
 
-    <EditText
-        android:id="@+id/editText4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="220dp" />
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="40dp"/>
 
-    <TextView
-        android:id="@+id/BusCode_txt"
-        android:layout_width="250dp"
-        android:layout_height="36dp"
-        android:text="Please, Insert the code available in your bus ticket"
-        tools:layout_editor_absoluteX="66dp"
-        tools:layout_editor_absoluteY="173dp" />
+        <TextView
+            android:id="@+id/Code_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"/>
+            android:text="" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="163dp"
-        tools:layout_editor_absoluteY="51dp" />
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="30dp"/>
 
-</android.support.constraint.ConstraintLayout>
+        <Button
+            android:id="@+id/login_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:text="Log in"
+            />
+
+
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="30dp"/>
+
+        <Button
+            android:id="@+id/signup_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:text="Sign Up" />
+
+
+
+</LinearLayout>
