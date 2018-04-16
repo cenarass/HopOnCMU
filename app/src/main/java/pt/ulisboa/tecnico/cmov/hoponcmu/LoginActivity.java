@@ -64,4 +64,12 @@ public class LoginActivity extends AppCompatActivity {
         startActivityForResult(intent, ApplicationOperationsCode.SIGN_UP.ordinal());
 
     }
+
+    public void SignUpBtnClicked(View view) {
+        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+        startActivity(intent);
+    }
+
+
+
 }
