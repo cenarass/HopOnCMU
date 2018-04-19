@@ -26,6 +26,11 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
+    public void LoginBtnClicked(View view) {
+
+
+
+    }
 
     @Override
     protected void onStart() {
