@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
+
+import static pt.ulisboa.tecnico.cmov.hoponcmu.R.id.country_id;
 
 public class SignUpActivity extends AppCompatActivity {
     HopOnCMUApplication _hopOnApp;
@@ -21,15 +24,27 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void SignUpBtnClicked(View view) {
+        //Get sign up values
+        EditText usernameEditText = (EditText) findViewById(R.id.new_username_txt),
+                passwordEditText = (EditText) findViewById(R.id.new_code_txt);
+        String usernameValue = usernameEditText.getText().toString(),
+                passwordValue = passwordEditText.getText().toString();
+        Spinner mySpinner = (Spinner) findViewById(R.id.country_id);
+            String usercountry = mySpinner.getSelectedItem().toString();
 
 
 
+
+        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+        intent.putExtra(LoginIntentKey.USERNAME.toString(), usernameValue);
+        intent.putExtra(LoginIntentKey.CODE.toString(), passwordValue);
+
+        startActivityForResult(intent, ApplicationOperationsCode.SIGN_UP.ordinal());
     }
 
     public void LoginBtnClicked(View view) {
-
-
-
+        Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 
     @Override

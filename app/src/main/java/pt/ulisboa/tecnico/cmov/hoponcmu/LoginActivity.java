@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
                 passwordEditText = (EditText) findViewById(R.id.code_txt);
         String usernameValue = usernameEditText.getText().toString(),
                 passwordValue = passwordEditText.getText().toString();
-
+/*
         //Save login fields
         SharedPreferences sharedPreferences = getSharedPreferences(SharedPreferenceKey.USERNAME.toString(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -54,14 +54,14 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString(SharedPreferenceKey.USERNAME.toString(), usernameValue);
         editor.putString(SharedPreferenceKey.CODE.toString(), passwordValue);
 
-        editor.apply();
+        editor.apply();*/
 
 
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.putExtra(LoginIntentKey.USERNAME.toString(), usernameValue);
         intent.putExtra(LoginIntentKey.CODE.toString(), passwordValue);
 
-        startActivityForResult(intent, ApplicationOperationsCode.SIGN_UP.ordinal());
+        startActivityForResult(intent, ApplicationOperationsCode.LOGIN.ordinal());
 
     }
 

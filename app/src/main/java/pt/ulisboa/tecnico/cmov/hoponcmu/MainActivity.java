@@ -24,8 +24,9 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String s = intent.getStringExtra(LoginIntentKey.USERNAME.toString());
-
         Toast.makeText(this,s,Toast.LENGTH_SHORT).show();
+        String pass = intent.getStringExtra(LoginIntentKey.CODE.toString());
+        Toast.makeText(this,pass,Toast.LENGTH_SHORT).show();
 
         bindService(
                 new Intent(MainActivity.this, HopOnService.class),
