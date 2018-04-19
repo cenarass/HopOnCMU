@@ -17,7 +17,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        _hopOnApp = (HopOnCMUApplication) getApplicationContext();
+        /*_hopOnApp = (HopOnCMUApplication) getApplicationContext();
 
         Intent intent = getIntent();
         if(intent.hasExtra(LoginIntentKey.USERNAME.toString()) && intent.hasExtra(LoginIntentKey.CODE.toString())) {
@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
                 ((EditText) findViewById(R.id.username_txt)).setText(username);
                 ((EditText) findViewById(R.id.code_txt)).setText(password);
             }
-        }
+        }*/
 
     }
 
