@@ -16,7 +16,7 @@
             android:layout_height="40dp"/>
 
         <EditText
-            android:id="@+id/username_txt"
+            android:id="@+id/new_username_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -30,7 +30,7 @@
             android:layout_height="40dp"/>
 
         <EditText
-            android:id="@+id/code_txt"
+            android:id="@+id/new_code_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -61,7 +61,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Sign Up"
+            android:onClick="SignUpBtnClicked"
             tools:layout_editor_absoluteX="199dp"
             tools:layout_editor_absoluteY="351dp" />
+
+        <Button
+            android:id="@+id/login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:onClick="LoginBtnClicked"
+            tools:layout_editor_absoluteX="199dp"
+            tools:layout_editor_absoluteY="351dp" />
+
+
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
