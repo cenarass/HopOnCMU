@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import static pt.ulisboa.tecnico.cmov.hoponcmu.R.id.country_id;
 
@@ -32,8 +33,15 @@ public class SignUpActivity extends AppCompatActivity {
         Spinner mySpinner = (Spinner) findViewById(R.id.country_id);
             String usercountry = mySpinner.getSelectedItem().toString();
 
-
-
+        //Check if values exist
+        if (usernameValue.equals("")){
+            Toast.makeText(this," Nao colocou username",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (passwordValue.equals("")){
+            Toast.makeText(this," Nao colocou password",Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
         intent.putExtra(LoginIntentKey.USERNAME.toString(), usernameValue);

@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     HopOnCMUApplication mHopOnCMUApplication;
@@ -23,10 +25,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        String s = intent.getStringExtra(LoginIntentKey.USERNAME.toString());
-        Toast.makeText(this,s,Toast.LENGTH_SHORT).show();
-        String pass = intent.getStringExtra(LoginIntentKey.CODE.toString());
-        Toast.makeText(this,pass,Toast.LENGTH_SHORT).show();
+        String usernameValue = intent.getStringExtra(LoginIntentKey.USERNAME.toString());
+        Toast.makeText(this,usernameValue,Toast.LENGTH_SHORT).show();
+        String passwordValue = intent.getStringExtra(LoginIntentKey.CODE.toString());
+        Toast.makeText(this,passwordValue,Toast.LENGTH_SHORT).show();
+
+
 
         bindService(
                 new Intent(MainActivity.this, HopOnService.class),
@@ -36,7 +40,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void listMonumentsBtnClicked(View view){
+
+        // HardCoded Value
+        ArrayList<String> monuments = new ArrayList<String>();
+        monuments.add("convento de mafra");
+        monuments.add("torre de belem");
+        monuments.add("estadio da luz");
+        monuments.add("marques de pombal");
+        Intent intent1 = getIntent();
+        String usernameValue = intent1.getStringExtra(LoginIntentKey.USERNAME.toString());
+        String passwordValue = intent1.getStringExtra(LoginIntentKey.CODE.toString());
+
         Intent intent = new Intent(MainActivity.this, MonumentActivity.class);
+        intent.putExtra(GlobalKey.USERNAME.toString(), usernameValue);
+        intent.putExtra(GlobalKey.CODE.toString(), passwordValue);
+        intent.putExtra(GlobalKey.MONUMENTS_LIST.toString(), monuments);
         startActivity(intent);
     }
 

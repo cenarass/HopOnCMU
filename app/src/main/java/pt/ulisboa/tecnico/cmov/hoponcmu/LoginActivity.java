@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        /*_hopOnApp = (HopOnCMUApplication) getApplicationContext();
+        _hopOnApp = (HopOnCMUApplication) getApplicationContext();
 
         Intent intent = getIntent();
         if(intent.hasExtra(LoginIntentKey.USERNAME.toString()) && intent.hasExtra(LoginIntentKey.CODE.toString())) {
@@ -34,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
                 ((EditText) findViewById(R.id.username_txt)).setText(username);
                 ((EditText) findViewById(R.id.code_txt)).setText(password);
             }
-        }*/
+        }
 
     }
 
@@ -46,7 +47,19 @@ public class LoginActivity extends AppCompatActivity {
                 passwordEditText = (EditText) findViewById(R.id.code_txt);
         String usernameValue = usernameEditText.getText().toString(),
                 passwordValue = passwordEditText.getText().toString();
-/*
+
+        //Check if values exist
+        if (usernameValue.equals("")){
+            Toast.makeText(this," Nao colocou username",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (passwordValue.equals("")){
+            Toast.makeText(this," Nao colocou password",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+
         //Save login fields
         SharedPreferences sharedPreferences = getSharedPreferences(SharedPreferenceKey.USERNAME.toString(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -54,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString(SharedPreferenceKey.USERNAME.toString(), usernameValue);
         editor.putString(SharedPreferenceKey.CODE.toString(), passwordValue);
 
-        editor.apply();*/
+        editor.apply();
 
 
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
