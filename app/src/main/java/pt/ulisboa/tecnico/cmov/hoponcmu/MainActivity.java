@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,13 +27,23 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String usernameValue = intent.getStringExtra(LoginIntentKey.USERNAME.toString());
-        Toast.makeText(this,usernameValue,Toast.LENGTH_SHORT).show();
+        mHopOnCMUApplication.setUsername(usernameValue);
+
         String passwordValue = intent.getStringExtra(LoginIntentKey.CODE.toString());
+        mHopOnCMUApplication.setCode(passwordValue);
         Toast.makeText(this,passwordValue,Toast.LENGTH_SHORT).show();
 
+        // HardCoded Value
+        ArrayList<String> monuments = new ArrayList<String>();
+        monuments.add("convento de mafra");
+        monuments.add("torre de belem");
+        monuments.add("estadio da luz");
+        monuments.add("marques de pombal");
+        mHopOnCMUApplication.setMonumentList(monuments);
 
 
-        bindService(
+
+                bindService(
                 new Intent(MainActivity.this, HopOnService.class),
                 wifiServiceConn,
                 Context.BIND_AUTO_CREATE);
@@ -41,22 +52,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void listMonumentsBtnClicked(View view){
 
-        // HardCoded Value
-        ArrayList<String> monuments = new ArrayList<String>();
-        monuments.add("convento de mafra");
-        monuments.add("torre de belem");
-        monuments.add("estadio da luz");
-        monuments.add("marques de pombal");
-        Intent intent1 = getIntent();
-        String usernameValue = intent1.getStringExtra(LoginIntentKey.USERNAME.toString());
-        String passwordValue = intent1.getStringExtra(LoginIntentKey.CODE.toString());
-
         Intent intent = new Intent(MainActivity.this, MonumentActivity.class);
-        intent.putExtra(GlobalKey.USERNAME.toString(), usernameValue);
-        intent.putExtra(GlobalKey.CODE.toString(), passwordValue);
-        intent.putExtra(GlobalKey.MONUMENTS_LIST.toString(), monuments);
+        intent.putExtra(GlobalKey.USERNAME.toString(),mHopOnCMUApplication.getUsername());
+        intent.putExtra(GlobalKey.CODE.toString(), mHopOnCMUApplication.getCode());
+        intent.putExtra(GlobalKey.MONUMENTS_LIST.toString(), mHopOnCMUApplication.getMonumentsList());
         startActivity(intent);
     }
+
+    public void QuizBtnClicked(View view){
+        Intent intent = new Intent(MainActivity.this, QuizActivity.class);
+        intent.putExtra(GlobalKey.USERNAME.toString(),mHopOnCMUApplication.getUsername());
+        intent.putExtra(GlobalKey.CODE.toString(), mHopOnCMUApplication.getCode());
+        intent.putExtra(GlobalKey.QUIZ_LIST.toString(), mHopOnCMUApplication.getQuizList());
+        startActivity(intent);
+    }
+
 
     public void scoreBtnClicked(View view){
         Intent intent = new Intent(MainActivity.this, ScoreActivity.class);
@@ -64,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume(){
         super.onResume();
     }
 

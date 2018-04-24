@@ -16,8 +16,9 @@ public class HopOnCMUApplication extends Application {
     private String  mUsername = "";
     private String mCode = "";
 
-    //List<LoginIntentKey> loginList= Arrays.asList(LoginIntentKey.values());
-    List<LoginIntentKey> loginList=new ArrayList<LoginIntentKey>();
+    private ArrayList<String> mMonumentsList = new ArrayList<String>();
+    private ArrayList<String> mQuizList = new ArrayList<String>();
+
 
     public String getUsername() {
         return mUsername;
@@ -25,10 +26,22 @@ public class HopOnCMUApplication extends Application {
     public void setUsername(String mUsername) {
         this.mUsername = mUsername;
     }
+
     public String getCode() {
         return mCode;
     }
     public void setCode(String mCode) {
         this.mCode = mCode;
     }
+
+    public ArrayList<String> getMonumentsList() { return mMonumentsList; }
+    public void setMonumentList(ArrayList<String> mMonumentsList) {
+        this.mMonumentsList = mMonumentsList;    }
+
+
+    public ArrayList<String> getQuizList() { return mQuizList; }
+    public void setQuizList(ArrayList<String> mQuizList) {
+        this.mQuizList = mQuizList;    }
+
+
 }

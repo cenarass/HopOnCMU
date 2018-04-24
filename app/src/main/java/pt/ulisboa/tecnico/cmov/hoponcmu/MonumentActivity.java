@@ -15,36 +15,53 @@ import java.util.List;
 
 public class MonumentActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
+    HopOnCMUApplication mHopOnCMUApplication;
+
     private ListView mListView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monument);
 
+        mHopOnCMUApplication = (HopOnCMUApplication) getApplicationContext();
 
+        //Cria o List view e o adaptador
 
-        //Cria o List view
         mListView = (ListView) findViewById(R.id.monument_list_id);
-// 1// 2
-
-
         ListView listview = (ListView) findViewById(R.id.monument_list_id);
         Intent intent=getIntent();
         if (intent.hasExtra(GlobalKey.MONUMENTS_LIST.toString())) {
             ArrayList<String> monuments = intent.getStringArrayListExtra(GlobalKey.MONUMENTS_LIST.toString());
             ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, monuments);
             listview.setOnItemClickListener(this);
-
             listview.setAdapter(adapter);
         }
-
         //
     }
 
     public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-        Log.i("HelloListView", "You clicked Item: " + id + " at position:" + position);
-        // Then you start a new Activity via Intent
-        Toast.makeText(this," Sucessoooo",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this," Downloading Quiz " + id + " at position:" + position ,Toast.LENGTH_SHORT).show();
+
+        // "" Downloading Selected Quiz ""
+        Intent intent1 = getIntent();
+        ArrayList<String> monuments = intent1.getStringArrayListExtra(GlobalKey.MONUMENTS_LIST.toString());
+        String QUIZ = monuments.get(position);
+
+
+        ArrayList<String> aux = mHopOnCMUApplication.getQuizList();
+        aux.add(QUIZ);
+
+        mHopOnCMUApplication.setQuizList(aux);
+
+        Intent intent = new Intent(MonumentActivity.this, MainActivity.class);
+        intent.putExtra(GlobalKey.USERNAME.toString(),mHopOnCMUApplication.getUsername());
+        intent.putExtra(GlobalKey.CODE.toString(), mHopOnCMUApplication.getCode());
+        intent.putExtra(GlobalKey.MONUMENTS_LIST.toString(), mHopOnCMUApplication.getMonumentsList());
+        intent.putExtra(GlobalKey.QUIZ_LIST.toString(), mHopOnCMUApplication.getQuizList());
+        startActivity(intent);
+
     }
 
 
