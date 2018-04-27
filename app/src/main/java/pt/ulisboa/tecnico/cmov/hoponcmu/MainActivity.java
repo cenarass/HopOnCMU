@@ -60,10 +60,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void QuizBtnClicked(View view){
+
         Intent intent = new Intent(MainActivity.this, QuizActivity.class);
         intent.putExtra(GlobalKey.USERNAME.toString(),mHopOnCMUApplication.getUsername());
         intent.putExtra(GlobalKey.CODE.toString(), mHopOnCMUApplication.getCode());
         intent.putExtra(GlobalKey.QUIZ_LIST.toString(), mHopOnCMUApplication.getQuizList());
+        intent.putExtra(GlobalKey.QUESTION_LIST.toString(), mHopOnCMUApplication.getQuestions());
         startActivity(intent);
     }
 

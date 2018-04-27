@@ -31,7 +31,8 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".QuizActivity"></activity>
+        <activity android:name=".QuizActivity" />
+        <activity android:name=".QuestionsActivity"></activity>
     </application>
 
 </manifest>

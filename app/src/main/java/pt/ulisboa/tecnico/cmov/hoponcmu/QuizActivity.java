@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class QuizActivity extends AppCompatActivity  implements AdapterView.OnItemClickListener {
     HopOnCMUApplication mHopOnCMUApplication;
@@ -36,7 +37,15 @@ public class QuizActivity extends AppCompatActivity  implements AdapterView.OnIt
     }
 
     public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-        Toast.makeText(this," Abrir Quiz" + id + " at position:" + position ,Toast.LENGTH_SHORT).show();
+        Intent thisintent= getIntent();
+        ArrayList<String> quizes = thisintent.getStringArrayListExtra(GlobalKey.QUIZ_LIST.toString());
+
+        Intent intent = new Intent(QuizActivity.this, QuestionsActivity.class);
+        intent.putExtra(GlobalKey.USERNAME.toString(),mHopOnCMUApplication.getUsername());
+        intent.putExtra(GlobalKey.CODE.toString(), mHopOnCMUApplication.getCode());
+        intent.putExtra(GlobalKey.QUESTION_LIST.toString(),  mHopOnCMUApplication.getQuestions());
+        intent.putExtra("Selected Value", quizes.get(position)  );
+        startActivity(intent);
     }
 
     @Override

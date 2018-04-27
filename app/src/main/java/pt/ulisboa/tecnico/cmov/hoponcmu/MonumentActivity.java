@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MonumentActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -44,24 +45,38 @@ public class MonumentActivity extends AppCompatActivity implements AdapterView.O
     public void onItemClick(AdapterView<?> l, View v, int position, long id) {
         Toast.makeText(this," Downloading Quiz " + id + " at position:" + position ,Toast.LENGTH_SHORT).show();
 
-        // "" Downloading Selected Quiz ""
         Intent intent1 = getIntent();
+
+        ArrayList<String> currentQuizList = mHopOnCMUApplication.getQuizList();
+        HashMap<String, ArrayList<String>> QuestionList= mHopOnCMUApplication.getQuestions();
         ArrayList<String> monuments = intent1.getStringArrayListExtra(GlobalKey.MONUMENTS_LIST.toString());
-        String QUIZ = monuments.get(position);
 
+        String QUIZKey = monuments.get(position);
 
-        ArrayList<String> aux = mHopOnCMUApplication.getQuizList();
-        aux.add(QUIZ);
+        // ve-se quizes ja foi downloaded, se sim só manda toast, se nao adicioana e volta para main
+        if (currentQuizList.contains(QUIZKey)) {
+            Toast.makeText(this,"Quiz " + id + " already downloaded" ,Toast.LENGTH_SHORT).show();
+        }else {
+            // "" Downloading Seleced Quiz ""
+            ArrayList<String> questions = new ArrayList<String>();
+            questions.add("Pergunta 1 do " + QUIZKey + "  ");
+            questions.add("Pergunta 2 do "  + QUIZKey + "  ");
+            questions.add("Pergunta 3 do" + QUIZKey + "  ");
 
-        mHopOnCMUApplication.setQuizList(aux);
+            QuestionList.put( QUIZKey , questions);
+            mHopOnCMUApplication.setQuestions( QuestionList );
 
-        Intent intent = new Intent(MonumentActivity.this, MainActivity.class);
-        intent.putExtra(GlobalKey.USERNAME.toString(),mHopOnCMUApplication.getUsername());
-        intent.putExtra(GlobalKey.CODE.toString(), mHopOnCMUApplication.getCode());
-        intent.putExtra(GlobalKey.MONUMENTS_LIST.toString(), mHopOnCMUApplication.getMonumentsList());
-        intent.putExtra(GlobalKey.QUIZ_LIST.toString(), mHopOnCMUApplication.getQuizList());
-        startActivity(intent);
+            currentQuizList.add(QUIZKey);
+            mHopOnCMUApplication.setQuizList(currentQuizList);
 
+            Intent intent = new Intent(MonumentActivity.this, MainActivity.class);
+            intent.putExtra(GlobalKey.USERNAME.toString(), mHopOnCMUApplication.getUsername());
+            intent.putExtra(GlobalKey.CODE.toString(), mHopOnCMUApplication.getCode());
+            intent.putExtra(GlobalKey.MONUMENTS_LIST.toString(), mHopOnCMUApplication.getMonumentsList());
+            intent.putExtra(GlobalKey.QUIZ_LIST.toString(), mHopOnCMUApplication.getQuizList());
+            intent.putExtra(GlobalKey.QUESTION_LIST.toString(), mHopOnCMUApplication.getQuestions());
+            startActivity(intent);
+        }
     }
 
 

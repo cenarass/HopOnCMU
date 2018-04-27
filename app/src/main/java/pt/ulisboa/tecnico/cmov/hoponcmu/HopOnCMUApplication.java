@@ -2,9 +2,9 @@ package pt.ulisboa.tecnico.cmov.hoponcmu;
 
 import android.app.Application;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
 
 /**
  * Created by peolie on 13-04-2018.
@@ -16,8 +16,11 @@ public class HopOnCMUApplication extends Application {
     private String  mUsername = "";
     private String mCode = "";
 
-    private ArrayList<String> mMonumentsList = new ArrayList<String>();
-    private ArrayList<String> mQuizList = new ArrayList<String>();
+    private ArrayList<String> mMonumentsList = new ArrayList<>();
+
+    //Lista De Quizes e Mapa para as perguntas de cada Quiz
+    private ArrayList<String> mQuizList = new ArrayList<>();
+    private HashMap<String, ArrayList<String>> mQuestions = new HashMap<>();
 
 
     public String getUsername() {
@@ -44,4 +47,11 @@ public class HopOnCMUApplication extends Application {
         this.mQuizList = mQuizList;    }
 
 
+    public HashMap<String, ArrayList<String>> getQuestions() {
+        return mQuestions;
+    }
+
+    public void setQuestions(HashMap<String, ArrayList<String>> mQuestions) {
+        this.mQuestions = mQuestions;
+    }
 }
