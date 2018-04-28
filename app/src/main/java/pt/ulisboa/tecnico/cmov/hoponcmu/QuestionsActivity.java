@@ -3,6 +3,7 @@ package pt.ulisboa.tecnico.cmov.hoponcmu;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +31,6 @@ public class QuestionsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String QuizKey = intent.getStringExtra("Selected Value");
-        ArrayList<String> quizes = intent.getStringArrayListExtra(GlobalKey.QUIZ_LIST.toString());
         HashMap<String, ArrayList<String>> Questions = (HashMap<String,ArrayList<String>>) intent.getSerializableExtra(GlobalKey.QUESTION_LIST.toString());
 
         ArrayList<String> s = Questions.get(QuizKey);
@@ -39,6 +39,28 @@ public class QuestionsActivity extends AppCompatActivity {
         question2.setText(s.get(1));
         question3.setText(s.get(2));
     }
+
+    public void SubmitBtnClicked(View view) {
+        Intent thisintent = getIntent();
+        ArrayList<String> SubmitList = thisintent.getStringArrayListExtra(GlobalKey.SUBMIT_LIST.toString());
+        String QuizKey = thisintent.getStringExtra("Selected Value");
+
+//        if (SubmitList.contains(QuizKey)){
+//            Toast.makeText(this,"Quiz já submetido, vá a scores para ver como correu " + QuizKey ,Toast.LENGTH_SHORT).show();
+//            return ;
+//        }else{
+
+        Toast.makeText(this, "A Submeter Quiz de " + QuizKey, Toast.LENGTH_SHORT).show();
+        SubmitList.add(QuizKey);
+        mHopOnCMUApplication.setSubmitList(SubmitList);
+
+        Intent intent = new Intent(QuestionsActivity.this, MainActivity.class);
+        intent.putExtra(GlobalKey.SUBMIT_LIST.toString(), mHopOnCMUApplication.getSubmitList());
+        intent.putExtra(GlobalKey.QUIZ_LIST.toString(), mHopOnCMUApplication.getQuizList());
+        startActivity(intent);
+    //  }
+    }
+
 
     @Override
     protected void onRestart() {

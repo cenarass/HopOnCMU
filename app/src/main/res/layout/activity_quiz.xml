@@ -12,6 +12,17 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/quizview_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Choose the Quiz you which to answer"
+            android:inputType="textNoSuggestions|textPersonName"
+            android:layout_marginTop="30dp"
+            tools:layout_editor_absoluteX="84dp"
+            tools:layout_editor_absoluteY="102dp" />
+
         <ListView
             android:id="@+id/quiz_list_id"
             android:layout_height="match_parent"

@@ -39,13 +39,20 @@ public class QuizActivity extends AppCompatActivity  implements AdapterView.OnIt
     public void onItemClick(AdapterView<?> l, View v, int position, long id) {
         Intent thisintent= getIntent();
         ArrayList<String> quizes = thisintent.getStringArrayListExtra(GlobalKey.QUIZ_LIST.toString());
+        ArrayList<String> SubmitList = thisintent.getStringArrayListExtra(GlobalKey.SUBMIT_LIST.toString());
 
-        Intent intent = new Intent(QuizActivity.this, QuestionsActivity.class);
-        intent.putExtra(GlobalKey.USERNAME.toString(),mHopOnCMUApplication.getUsername());
-        intent.putExtra(GlobalKey.CODE.toString(), mHopOnCMUApplication.getCode());
-        intent.putExtra(GlobalKey.QUESTION_LIST.toString(),  mHopOnCMUApplication.getQuestions());
-        intent.putExtra("Selected Value", quizes.get(position)  );
-        startActivity(intent);
+        if (SubmitList.contains(quizes.get(position))) {
+            Toast.makeText(this,"Quiz de "+ quizes.get(position) +"já submetido, vá a scores para ver como correu "  ,Toast.LENGTH_SHORT).show();
+            return ;
+        }else{
+            Intent intent = new Intent(QuizActivity.this, QuestionsActivity.class);
+            intent.putExtra(GlobalKey.USERNAME.toString(), mHopOnCMUApplication.getUsername());
+            intent.putExtra(GlobalKey.CODE.toString(), mHopOnCMUApplication.getCode());
+            intent.putExtra(GlobalKey.QUESTION_LIST.toString(), mHopOnCMUApplication.getQuestions());
+            intent.putExtra(GlobalKey.SUBMIT_LIST.toString(), mHopOnCMUApplication.getSubmitList());
+            intent.putExtra("Selected Value", quizes.get(position));
+            startActivity(intent);
+        }
     }
 
     @Override

@@ -22,6 +22,8 @@ public class HopOnCMUApplication extends Application {
     private ArrayList<String> mQuizList = new ArrayList<>();
     private HashMap<String, ArrayList<String>> mQuestions = new HashMap<>();
 
+    private ArrayList<String> mSubmitList = new ArrayList<>();
+
 
     public String getUsername() {
         return mUsername;
@@ -47,11 +49,12 @@ public class HopOnCMUApplication extends Application {
         this.mQuizList = mQuizList;    }
 
 
-    public HashMap<String, ArrayList<String>> getQuestions() {
-        return mQuestions;
-    }
-
+    public HashMap<String, ArrayList<String>> getQuestions() { return mQuestions; }
     public void setQuestions(HashMap<String, ArrayList<String>> mQuestions) {
         this.mQuestions = mQuestions;
+    }
+
+    public ArrayList<String> getSubmitList() { return mSubmitList; }
+    public void setSubmitList(ArrayList<String> mSubmitList) { this.mSubmitList = mSubmitList;
     }
 }

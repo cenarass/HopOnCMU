@@ -41,6 +41,13 @@ public class MainActivity extends AppCompatActivity {
         monuments.add("marques de pombal");
         mHopOnCMUApplication.setMonumentList(monuments);
 
+        ArrayList<String> results = mHopOnCMUApplication.getSubmitList();
+        if (results.isEmpty()) {
+            results.add("Final Tour Results");
+            mHopOnCMUApplication.setSubmitList(results);
+        }
+
+
 
 
                 bindService(
@@ -66,12 +73,16 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(GlobalKey.CODE.toString(), mHopOnCMUApplication.getCode());
         intent.putExtra(GlobalKey.QUIZ_LIST.toString(), mHopOnCMUApplication.getQuizList());
         intent.putExtra(GlobalKey.QUESTION_LIST.toString(), mHopOnCMUApplication.getQuestions());
+        intent.putExtra(GlobalKey.SUBMIT_LIST.toString(), mHopOnCMUApplication.getSubmitList());
         startActivity(intent);
     }
 
 
     public void scoreBtnClicked(View view){
         Intent intent = new Intent(MainActivity.this, ScoreActivity.class);
+        intent.putExtra(GlobalKey.USERNAME.toString(),mHopOnCMUApplication.getUsername());
+        intent.putExtra(GlobalKey.CODE.toString(), mHopOnCMUApplication.getCode());
+        intent.putExtra(GlobalKey.SUBMIT_LIST.toString(), mHopOnCMUApplication.getSubmitList());
         startActivity(intent);
     }
 

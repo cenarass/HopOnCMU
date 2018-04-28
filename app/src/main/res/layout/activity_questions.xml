@@ -173,6 +173,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Submit"
+                    android:onClick="SubmitBtnClicked"
                     tools:layout_editor_absoluteX="199dp"
                     tools:layout_editor_absoluteY="351dp" />
 
