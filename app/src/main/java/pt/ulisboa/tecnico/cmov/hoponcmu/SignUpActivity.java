@@ -10,6 +10,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import static pt.ulisboa.tecnico.cmov.hoponcmu.R.id.country_id;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -24,7 +27,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
-    public void SignUpBtnClicked(View view) {
+    public void SignUpBtnClicked(View view) throws JSONException {
         //Get sign up values
         EditText usernameEditText = (EditText) findViewById(R.id.new_username_txt),
                 passwordEditText = (EditText) findViewById(R.id.new_code_txt);
@@ -42,6 +45,21 @@ public class SignUpActivity extends AppCompatActivity {
             Toast.makeText(this," Nao colocou password",Toast.LENGTH_SHORT).show();
             return;
         }
+
+
+        // Request Message
+        UserRequest userRequest = UserRequest.SIGN_UP;
+        JSONObject message = new JSONObject();
+        message.put(NetworkKey.REQUEST_TYPE.toString(), userRequest.ordinal());
+        message.put(NetworkKey.USERNAME.toString(), usernameValue);
+        message.put(NetworkKey.PASSWORD.toString(), passwordValue);
+        message.put(NetworkKey.COUNTRY.toString(), usercountry);
+
+        ClientProxy clientProxy = new ClientProxy(userRequest, NetworkMsg.SIGN_UP , message);
+        new Thread(clientProxy).start();
+
+
+
 
         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
         intent.putExtra(LoginIntentKey.USERNAME.toString(), usernameValue);
