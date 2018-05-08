@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class LoginActivity extends AppCompatActivity {
 
     HopOnCMUApplication _hopOnApp;
@@ -19,6 +22,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         _hopOnApp = (HopOnCMUApplication) getApplicationContext();
+
+
 
         Intent intent = getIntent();
         if(intent.hasExtra(LoginIntentKey.USERNAME.toString()) && intent.hasExtra(LoginIntentKey.CODE.toString())) {
@@ -40,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    public void loginBtnClicked(View view) {
+    public void loginBtnClicked(View view) throws JSONException {
 
        //Get login values
         EditText usernameEditText = (EditText) findViewById(R.id.username_txt),
@@ -57,6 +62,17 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this," Nao colocou password",Toast.LENGTH_SHORT).show();
             return;
         }
+
+
+        // Request Message
+        UserRequest userRequest = UserRequest.LOGIN;
+        JSONObject message = new JSONObject();
+        message.put(NetworkKey.REQUEST_TYPE.toString(), userRequest.ordinal());
+        message.put(NetworkKey.USERNAME.toString(), usernameValue);
+        message.put(NetworkKey.PASSWORD.toString(), passwordValue);
+
+        ClientProxy clientProxy = new ClientProxy(userRequest, NetworkMsg.LOGIN , message);
+        new Thread(clientProxy).start();
 
 
 

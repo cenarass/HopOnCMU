@@ -6,5 +6,8 @@ package pt.ulisboa.tecnico.cmov.hoponcmu;
 
 final class Constant {
     public static final String INVALID_VALUE = null;
+
+    public class SOCKET_TIMEOUT {
+    }
 }
 
