@@ -34,5 +34,5 @@
         <activity android:name=".QuizActivity" />
         <activity android:name=".QuestionsActivity"></activity>
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
