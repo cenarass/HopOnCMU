@@ -1,4 +1,4 @@
-package server;
+package pt.ulisboa.tecnico.cmov.hoponcmu.server;
 
 public enum UserRequest {
     LOGIN,
