@@ -4,7 +4,19 @@ import android.os.Handler;
 
 abstract class HandlerActivity {
 
-        protected Handler mHandler;
+        protected Handler _handler;
+
+//        protected class HandlerThread implements Runnable {
+//
+//                public HandlerThread( Handler handler ){
+//                        _handler = handler;
+//
+//                }
+//
+//
+//
+//        }
+
 
 
 

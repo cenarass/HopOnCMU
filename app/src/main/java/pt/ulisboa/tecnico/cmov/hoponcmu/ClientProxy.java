@@ -2,6 +2,7 @@ package pt.ulisboa.tecnico.cmov.hoponcmu;
 
 import android.os.AsyncTask;
 
+import android.os.Handler;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -30,11 +31,14 @@ public class ClientProxy implements Runnable {
     private UserRequest _userRequest;
     private NetworkMsg _networkMsg;
     private JSONObject _message;
+    private Handler _handler;
+    private ServerReply _serverReply;
 
-    public ClientProxy(UserRequest userRequest, NetworkMsg networkMsg, JSONObject message) {
+    public ClientProxy(UserRequest userRequest, Handler handler, NetworkMsg networkMsg, JSONObject message) {
         super();
         _userRequest = userRequest;
         _networkMsg = networkMsg;
+        _handler = handler;
         _message = message;
     }
 
@@ -59,22 +63,15 @@ public class ClientProxy implements Runnable {
             ois.readFully(message, 0, lengh);
 
 
-            int replyString;
             JSONObject reply = new JSONObject(new String(message));
-            replyString = reply.getInt(NetworkKey.REPLY_TYPE.toString());
-            ServerReply serverReply = ServerReply.values()[replyString];
+            System.out.println("Received: " + reply);
 
+            int replyType;
+            replyType= reply.getInt(NetworkKey.REPLY_TYPE.toString());
+            ServerReply serverReply = ServerReply.values()[replyType];
 
+            _handler.obtainMessage(serverReply.ordinal(), reply).sendToTarget();
 
-
-            switch (serverReply) {
-                case SUCESS:
-                    break;
-                default:
-                    System.out.println("Não funcionou");
-                    return;
-            }
-                System.out.println("Received: " + reply);
 
                 oos.close();
                 ois.close();

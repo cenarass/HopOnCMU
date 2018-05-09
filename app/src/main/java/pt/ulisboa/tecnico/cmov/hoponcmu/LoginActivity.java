@@ -3,6 +3,9 @@ package pt.ulisboa.tecnico.cmov.hoponcmu;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +17,8 @@ import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
 
+
+    protected Handler _handler;
     HopOnCMUApplication _hopOnApp;
 
     @Override
@@ -42,6 +47,36 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
 
+        _handler = new Handler(Looper.getMainLooper()){
+            public void handleMessage(Message message){
+                ServerReply serverReply = ServerReply.values()[message.what];
+                System.out.println(message.what);
+                EditText usernameEditText = (EditText) findViewById(R.id.username_txt),
+                        passwordEditText = (EditText) findViewById(R.id.code_txt);
+                String usernameValue = usernameEditText.getText().toString(),
+                        passwordValue = passwordEditText.getText().toString();
+
+                System.out.println(serverReply);
+                switch (serverReply){
+                        case SUCESS:
+                            Toast.makeText(_hopOnApp, "Login sucessfull", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.putExtra(LoginIntentKey.USERNAME.toString(), usernameValue);
+                            intent.putExtra(LoginIntentKey.CODE.toString(), passwordValue);
+                            startActivityForResult(intent, ApplicationOperationsCode.LOGIN.ordinal());
+                            break;
+                        case WRONG_PASS:
+                            Toast.makeText(_hopOnApp, "Right User but Wrong Password", Toast.LENGTH_SHORT).show();
+                            break;
+                        case WRONG_USER:
+                            Toast.makeText(_hopOnApp, " User Does Not exist", Toast.LENGTH_SHORT).show();
+                            break;
+                        default:
+                            return;
+                }
+
+            }
+        };
     }
 
 
@@ -71,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
         message.put(NetworkKey.USERNAME.toString(), usernameValue);
         message.put(NetworkKey.PASSWORD.toString(), passwordValue);
 
-        ClientProxy clientProxy = new ClientProxy(userRequest, NetworkMsg.LOGIN , message);
+        ClientProxy clientProxy = new ClientProxy(userRequest, _handler ,NetworkMsg.LOGIN , message);
         new Thread(clientProxy).start();
 
 
@@ -84,13 +119,6 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString(SharedPreferenceKey.CODE.toString(), passwordValue);
 
         editor.apply();
-
-
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        intent.putExtra(LoginIntentKey.USERNAME.toString(), usernameValue);
-        intent.putExtra(LoginIntentKey.CODE.toString(), passwordValue);
-
-        startActivityForResult(intent, ApplicationOperationsCode.LOGIN.ordinal());
 
     }
 
