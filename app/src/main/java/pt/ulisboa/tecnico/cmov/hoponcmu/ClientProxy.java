@@ -32,7 +32,7 @@ public class ClientProxy implements Runnable {
     private NetworkMsg _networkMsg;
     private JSONObject _message;
     private Handler _handler;
-    private ServerReply _serverReply;
+
 
     public ClientProxy(UserRequest userRequest, Handler handler, NetworkMsg networkMsg, JSONObject message) {
         super();

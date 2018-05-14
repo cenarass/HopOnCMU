@@ -10,4 +10,5 @@ public enum ServerReply {
     //sign up
     INVALID_USER,
     INVALID_PASS,
+    ERROR, QUIZ_SUBMITED,
 }

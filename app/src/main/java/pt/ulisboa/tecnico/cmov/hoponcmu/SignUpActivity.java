@@ -61,8 +61,8 @@ public class SignUpActivity extends AppCompatActivity {
                 System.out.println(serverReply);
                 switch (serverReply){
                     case SUCESS:
-                        Toast.makeText(_hopOnApp, "Login sucessfull", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                        Toast.makeText(_hopOnApp, "Sign Up sucessfull", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                         intent.putExtra(LoginIntentKey.USERNAME.toString(), usernameValue);
                         intent.putExtra(LoginIntentKey.CODE.toString(), passwordValue);
                         startActivityForResult(intent, ApplicationOperationsCode.LOGIN.ordinal());
@@ -76,13 +76,8 @@ public class SignUpActivity extends AppCompatActivity {
                     default:
                         return;
                 }
-
             }
         };
-
-
-
-
     }
 
     public void SignUpBtnClicked(View view) throws JSONException {

@@ -12,8 +12,17 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -50,20 +59,21 @@ public class LoginActivity extends AppCompatActivity {
         _handler = new Handler(Looper.getMainLooper()){
             public void handleMessage(Message message){
                 ServerReply serverReply = ServerReply.values()[message.what];
+
                 System.out.println(message.what);
-                EditText usernameEditText = (EditText) findViewById(R.id.username_txt),
-                        passwordEditText = (EditText) findViewById(R.id.code_txt);
-                String usernameValue = usernameEditText.getText().toString(),
-                        passwordValue = passwordEditText.getText().toString();
+
 
                 System.out.println(serverReply);
                 switch (serverReply){
                         case SUCESS:
+                            try {
+                                Login_Sucess(message);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                             Toast.makeText(_hopOnApp, "Login sucessfull", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            intent.putExtra(LoginIntentKey.USERNAME.toString(), usernameValue);
-                            intent.putExtra(LoginIntentKey.CODE.toString(), passwordValue);
-                            startActivityForResult(intent, ApplicationOperationsCode.LOGIN.ordinal());
                             break;
                         case WRONG_PASS:
                             Toast.makeText(_hopOnApp, "Right User but Wrong Password", Toast.LENGTH_SHORT).show();
@@ -74,9 +84,45 @@ public class LoginActivity extends AppCompatActivity {
                         default:
                             return;
                 }
-
             }
         };
+    }
+
+    private void Login_Sucess(Message message) throws IOException, JSONException {
+
+        EditText usernameEditText = (EditText) findViewById(R.id.username_txt),
+                passwordEditText = (EditText) findViewById(R.id.code_txt);
+        String usernameValue = usernameEditText.getText().toString(),
+                passwordValue = passwordEditText.getText().toString();
+
+
+        JSONObject serverReply = (JSONObject) message.obj;
+
+        String UserIDPath = getApplicationInfo().dataDir + "/" + _hopOnApp.getUsername() + ".txt";
+
+        File UserFile = new File(UserIDPath);
+        if(!UserFile.exists()){UserFile.createNewFile();}
+
+        String sessionID = serverReply.getString(NetworkKey.SESSION_ID.toString());
+        Writer writer = new OutputStreamWriter(new FileOutputStream(UserIDPath), "utf-8");
+        writer = new BufferedWriter(writer);
+        writer.write(sessionID);
+        writer.close();
+
+        String Country = serverReply.getString(NetworkKey.COUNTRY.toString());
+        _hopOnApp.setCountry(Country);
+
+        JSONArray tours= serverReply.getJSONArray(NetworkKey.TOUR_LIST.toString());
+
+        _hopOnApp.setTourList(tours);
+
+        Toast.makeText(_hopOnApp, tours.toString() , Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.putExtra(LoginIntentKey.USERNAME.toString(), usernameValue);
+        intent.putExtra(LoginIntentKey.CODE.toString(), passwordValue);
+
+        startActivityForResult(intent, ApplicationOperationsCode.LOGIN.ordinal());
     }
 
 
@@ -108,8 +154,6 @@ public class LoginActivity extends AppCompatActivity {
 
         ClientProxy clientProxy = new ClientProxy(userRequest, _handler ,NetworkMsg.LOGIN , message);
         new Thread(clientProxy).start();
-
-
 
         //Save login fields
         SharedPreferences sharedPreferences = getSharedPreferences(SharedPreferenceKey.USERNAME.toString(), Context.MODE_PRIVATE);

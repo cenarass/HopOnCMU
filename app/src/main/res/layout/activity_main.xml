@@ -1,4 +1,4 @@
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,6 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="140dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
         <Button
             android:id="@+id/monList_btn"
             android:layout_width="140dp"
@@ -20,7 +30,7 @@
             android:onClick="listMonumentsBtnClicked"
             android:text="List Monuments"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/spinner" />
 
 
         <Button
@@ -33,7 +43,6 @@
             android:onClick="QuizBtnClicked"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/monList_btn" />
-
 
         <Button
             android:id="@+id/score_btn"
@@ -48,7 +57,6 @@
             app:layout_constraintTop_toBottomOf="@+id/quizes_btn"
             app:layout_constraintVertical_bias="1.0" />
 
-
         <Button
             android:id="@+id/logout_btn"
             android:layout_width="140dp"
@@ -59,7 +67,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/score_btn"
              />
-        </LinearLayout>
+
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
 

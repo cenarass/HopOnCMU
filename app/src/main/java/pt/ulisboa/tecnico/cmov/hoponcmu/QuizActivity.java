@@ -9,8 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class QuizActivity extends AppCompatActivity  implements AdapterView.OnItemClickListener {
     HopOnCMUApplication mHopOnCMUApplication;
@@ -28,31 +31,25 @@ public class QuizActivity extends AppCompatActivity  implements AdapterView.OnIt
         mListView = (ListView) findViewById(R.id.quiz_list_id);
         ListView listview = (ListView) findViewById(R.id.quiz_list_id);
         Intent intent=getIntent();
-        if (intent.hasExtra(GlobalKey.QUIZ_LIST.toString())) {
-            ArrayList<String> quizes = intent.getStringArrayListExtra(GlobalKey.QUIZ_LIST.toString());
-            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, quizes);
+
+        HashMap<String, JSONArray> quizes = mHopOnCMUApplication.getQuiz_array();
+            ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, quizes.keySet().toArray());
             listview.setOnItemClickListener(this);
             listview.setAdapter(adapter);
-        }//
+        //
     }
 
     public void onItemClick(AdapterView<?> l, View v, int position, long id) {
         Intent thisintent= getIntent();
-        ArrayList<String> quizes = thisintent.getStringArrayListExtra(GlobalKey.QUIZ_LIST.toString());
-        ArrayList<String> SubmitList = thisintent.getStringArrayListExtra(GlobalKey.SUBMIT_LIST.toString());
 
-        if (SubmitList.contains(quizes.get(position))) {
-            Toast.makeText(this,"Quiz de "+ quizes.get(position) +"já submetido, vá a scores para ver como correu "  ,Toast.LENGTH_SHORT).show();
-            return ;
-        }else{
-            Intent intent = new Intent(QuizActivity.this, QuestionsActivity.class);
-            intent.putExtra(GlobalKey.USERNAME.toString(), mHopOnCMUApplication.getUsername());
-            intent.putExtra(GlobalKey.CODE.toString(), mHopOnCMUApplication.getCode());
-            intent.putExtra(GlobalKey.QUESTION_LIST.toString(), mHopOnCMUApplication.getQuestions());
-            intent.putExtra(GlobalKey.SUBMIT_LIST.toString(), mHopOnCMUApplication.getSubmitList());
-            intent.putExtra("Selected Value", quizes.get(position));
-            startActivity(intent);
-        }
+        HashMap<String, JSONArray> quizes = mHopOnCMUApplication.getQuiz_array();
+        Toast.makeText(this,"Quiz de "+ id +"já submetido, vá a scores para ver como correu "  ,Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(QuizActivity.this, QuestionsActivity.class);
+        intent.putExtra(GlobalKey.USERNAME.toString(), mHopOnCMUApplication.getUsername());
+        intent.putExtra(GlobalKey.CODE.toString(), mHopOnCMUApplication.getCode());
+        intent.putExtra(GlobalKey.SUBMIT_LIST.toString(), mHopOnCMUApplication.getSubmitList());
+        intent.putExtra("Selected Value", mHopOnCMUApplication.getQuizList().get(position));
+        startActivity(intent);
     }
 
     @Override
