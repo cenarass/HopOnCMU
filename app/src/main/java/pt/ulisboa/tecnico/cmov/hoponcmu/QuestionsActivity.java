@@ -49,7 +49,6 @@ public class QuestionsActivity extends AppCompatActivity {
                             int TourScore =  Reply.getInt(NetworkKey.TOUR_SCORE.toString());
 
                             mHopOnCMUApplication.addQuizscore(monumentName, QuizScore);
-
                             mHopOnCMUApplication.removeTourScore(tourName);
                             mHopOnCMUApplication.addTourScore(tourName , TourScore);
 
@@ -63,7 +62,6 @@ public class QuestionsActivity extends AppCompatActivity {
                     case QUIZ_SUBMITED:
                         Intent thisintent = getIntent();
                         Intent intent = new Intent(QuestionsActivity.this, MainActivity.class);
-                        intent.putExtra(GlobalKey.SUBMIT_LIST.toString(), mHopOnCMUApplication.getSubmitList());
                         startActivity(intent);
                         return;
                     default:

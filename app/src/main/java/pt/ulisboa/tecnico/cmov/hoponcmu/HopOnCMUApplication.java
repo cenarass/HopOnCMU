@@ -40,7 +40,7 @@ public class HopOnCMUApplication extends Application {
     }public void addQuizscore(String key, int points ){
         mQuiz_score.put(key, points);
         return ;
-    }public boolean checkIfSubmited(String monument ){
+    }public boolean checkIfSubmited(String monument){
         return mQuiz_score.keySet().contains(monument);
         }
 
@@ -110,7 +110,7 @@ public class HopOnCMUApplication extends Application {
     }
 
     public HashMap<String,JSONArray> getQuiz_array() {
-        return quiz_array;
+        return this.quiz_array;
     }
 
     public void removeTourScore(String tourName) {
